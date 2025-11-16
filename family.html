@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Biodata Fahri</title>
+  <link rel="icon" type="" href="teladan.webp">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      background: url("background.jpg") no-repeat center center/cover;
+      color: #cccccc;
+      overflow-x: hidden;
+      min-height: 100vh;
+      position: relative;
+    }
+
+      nav {
+      width: 100%;
+      height: 10vh;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 1px; /* kiri kanan seimbang */
+    }
+
+
+    .nav-container {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    .logo {
+      color: white;
+      font-size: 2rem;
+      font-weight: bold;
+    }
+
+    .logo span {
+      color: rgb(58, 211, 255);
+      text-shadow: 0 0 10px rgb(58, 211, 255);
+    }
+
+    .hamburg, .cancel {
+      cursor: pointer;
+      position: absolute;
+      right: 15px;
+      top: 10px;
+      color: #cccccc;
+      display: none;
+      font-size: clamp(2.5rem, 0.5rem + 5vw, 3rem);
+    }
+
+    .nav-container .links {
+      display: flex;
+    }
+
+    .nav-container .links a {
+      font-size: 1.2rem;
+      color: #cccccc;
+      margin: 0 20px;
+      text-decoration: none;
+      font-weight: 550;
+      transition: 0.3s linear;
+    }
+
+    .nav-container .links a:hover {
+      color: rgb(58, 211, 255);
+      border-bottom: 2px solid rgb(58, 211, 255);
+    }
+
+    .nav-container .links .active {
+      color: rgb(58, 211, 255);
+      border-bottom: 2px solid rgb(58, 211, 255);
+    }
+
+    .dropdown {
+      z-index: 1000;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      transform: translateY(-500px);
+      width: 100%;
+      height: auto;
+      backdrop-filter: blur(8px) brightness(40%);
+      box-shadow: 0 0 20px black;
+      transition: transform 0.4s ease;
+    }
+
+    /* kalau aktif, geser turun */
+    .dropdown.active {
+      transform: translateY(0);
+    }
+
+
+    .dropdown .links a {
+      display: flex;
+      color: #cccccc;
+      text-decoration: none;
+      padding: 15px 0;
+      justify-content: center;
+      align-items: center;
+      transition: 0.2s linear;
+    }
+
+    .dropdown .links a:hover {
+      background-color: rgb(58, 211, 255);
+    }
+
+    /* FAMILY SECTION */
+    .family-container {
+      width: 100%;
+      min-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 3rem 2rem;
+    }
+
+    .family-header h1 {
+      font-size: 2.8rem;
+      color: rgb(58, 211, 255);
+      text-shadow: 0 0 15px rgba(58, 211, 255, 0.8);
+      font-weight: 700;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .family-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      justify-items: center;
+      width: 100%;
+      max-width: 1200px;
+    }
+
+    .family-card {
+      background: rgba(0, 0, 20, 0.6);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(58, 211, 255, 0.3);
+      border-radius: 20px;
+      text-align: center;
+      padding: 1.5rem;
+      transition: all 0.4s ease;
+      box-shadow: 0 0 15px rgba(58, 211, 255, 0.2);
+      width: 100%;
+      max-width: 320px;
+    }
+
+    .family-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 0 25px rgba(58, 211, 255, 0.8);
+      border-color: rgb(58, 211, 255);
+    }
+
+    .family-card img {
+      width: 100%;
+      border-radius: 15px;
+      margin-bottom: 1rem;
+      transition: 0.4s ease;
+    }
+
+    .family-card:hover img {
+      transform: scale(1.05);
+    }
+
+    .family-card h3 {
+      font-size: 1.4rem;
+      color: rgb(58, 211, 255);
+      text-shadow: 0 0 8px rgba(58, 211, 255, 0.6);
+      font-weight: 700;
+      margin-bottom: 0.8rem;
+    }
+
+    .biodata {
+      color: #cccccc;
+      font-weight: 400;
+      line-height: 1.6;
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 884px) {
+      .nav-container .links {
+        display: none;
+      }
+      .hamburg, .cancel {
+        display: block;
+      }
+      .family-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .family-grid {
+        grid-template-columns: 1fr;
+      }
+      .family-header h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="nav-container">
+      <div class="logo" data-aos="zoom-in" data-aos-duration="1500">
+        Fahri <span>Darmawan</span>
+      </div>
+      <div class="links">
+        <div class="link" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="100"><a href="index.html">Home</a></div>
+        <div class="link" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="200"><a href="about.html">About</a></div>
+        <div class="link active" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="400"><a href="family.html">Family</a></div>
+        <div class="link" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="500"><a href="contact.html">Contact</a></div>
+      </div>
+    </div>
+    <i class="fa-solid fa-bars hamburg" onclick="hamburg()"></i>
+    <div class="dropdown">
+      <div class="links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="family.html">Family</a>
+        <a href="contact.html">Contact</a>
+        <i class="fa-solid fa-xmark cancel" onclick="cancel()"></i>
+      </div>
+    </div>
+  </nav>
+
+  <!-- FAMILY SECTION -->
+  <section class="family-container">
+    <div class="family-header" data-aos="fade-down" data-aos-duration="1500">
+      <h1>My Family</h1>
+    </div>
+
+    <div class="family-grid">
+      <div class="family-card" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="100">
+        <img src="foto ayah.jpeg" alt="Ayah">
+        <h3>Ayah</h3>
+        <div class="biodata">
+          <p>Nama: Erafi Darmawan</p>
+          <p>Pekerjaan: Wiraswasta</p>
+          <p>Umur: 44 Tahun</p>
+          <p>TTL: Purbasari, 27 Oktober 1981</p>
+        </div>
+      </div>
+
+      <div class="family-card" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="200">
+        <img src="foto ibu.jpeg" alt="Ibu">
+        <h3>Ibu</h3>
+        <div class="biodata">
+          <p>Nama: Nur Irmayani</p>
+          <p>Pekerjaan: Ibu Rumah Tangga</p>
+          <p>Umur: 38 Tahun</p>
+          <p>TTL: Pematang Siantar, 24 Januari 1986</p>
+        </div>
+      </div>
+
+      <div class="family-card" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="300">
+        <img src="fahri.jpeg" alt="Fahri">
+        <h3>Abang</h3>
+        <div class="biodata">
+          <p>Nama: Fahri Darmawan</p>
+          <p>Pekerjaan: Pelajar</p>
+          <p>Umur: 16 Tahun</p>
+          <p>TTL: Purbasari, 9 Juni 2009</p>
+        </div>
+      </div>
+
+      <div class="family-card" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="400">
+        <img src="foto adik.jpeg" alt="Adik 1">
+        <h3>Adik 1</h3>
+        <div class="biodata">
+          <p>Nama: Rizky Sakha Darmawan</p>
+          <p>Pekerjaan: Pelajar SD</p>
+          <p>Umur: 10 Tahun</p>
+          <p>TTL: Beringin, 25 Juli 2015</p>
+        </div>
+      </div>
+
+      <div class="family-card" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="500">
+        <img src="poto adik ke dua.jpeg" alt="Adik 2">
+        <h3>Adik 2</h3>
+        <div class="biodata">
+          <p>Nama: New Born</p>
+          <p>Pekerjaan: -</p>
+          <p>Umur: -</p>
+          <p>TTL: Beringin, 8 Oktober 2025</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- SCRIPT -->
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init({ offset: 0, duration: 1200 });
+  
+    const dropdown = document.querySelector('.dropdown');
+  
+    function hamburg() {
+      dropdown.classList.add('active'); // munculkan dropdown
+    }
+  
+    function cancel() {
+      dropdown.classList.remove('active'); // sembunyikan dropdown
+    }
+  </script>  
+</body>
+</html>
